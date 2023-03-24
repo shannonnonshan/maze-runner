@@ -1,15 +1,17 @@
 import random
 
+from location import Location
+
+
 class Coin:
-    def __init__(self, x_range, y_range, obstacles, bot_position):
-        self.x = None
-        self.y = None
-        self.x_range = x_range
-        self.y_range = y_range
-        self.obstacles = obstacles
-        self.bot_position = bot_position
+    def __init__(self, coin: Location, height, width, obstacle, bot):
+        self.loc: Location = coin
+        self.x_range = height
+        self.y_range = width
+        self.obstacles = obstacle
+        self.bot_position = bot
         self.positions = set()
-        self.create_coins()
+        # self.create_coins()
 
     def create_coins(self):
         while len(self.positions) < self.x_range[1] * self.y_range[1]:
@@ -35,20 +37,20 @@ class Coin:
     def __str__(self):
         return f"Coins positions: {self.positions}"
 
-
-# Define the main function
-def main():
-    # Set up the game parameters
-    x_range = (0, 10)
-    y_range = (0, 10)
-    obstacles = [(2, 2), (3, 5), (7, 8)]
-    bot_position = (5, 5)
-
-    # Create a Coin object and print its positions
-    coins = Coin(x_range, y_range, obstacles, bot_position)
-    print(coins)
-
-
-# Call the main function
-if __name__ == "__main__":
-    main()
+#
+# # Define the main function
+# def main():
+#     # Set up the game parameters
+#     x_range = (0, 10)
+#     y_range = (0, 10)
+#     obstacles = [(2, 2), (3, 5), (7, 8)]
+#     bot_position = (5, 5)
+#
+#     # Create a Coin object and print its positions
+#     coins = Coin(x_range, y_range, obstacles, bot_position)
+#     print(coins)
+#
+#
+# # Call the main function
+# if __name__ == "__main__":
+#     main()

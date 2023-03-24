@@ -1,11 +1,8 @@
-import heapq
 import json
-import math
 import os
-from heapq import heappop
 from typing import List
 
-import location
+from Coin import Coin
 from location import Location
 
 
@@ -14,17 +11,20 @@ class Map:
     height = None
     obstacles: List[Location] = None
     bot: Location = None
-    coin: Location = None
+    coin: Coin = None
     locations = None
     map = None
-    filename = 'output.txt'
+    outputFile = None
+    inputFile = None
 
     def init_file(self):
-        filepath = os.path.join(os.getcwd(), self.filename)
+        filepath = os.path.join(os.getcwd(), self.outputFile)
         with open(filepath, 'w') as f:
             f.write('')
 
-    def __init__(self):
+    def __init__(self, inputF, outputF):
+        self.outputFile = outputF
+        self.inputFile = inputF
         self.loadJson()
         self.loadLocs()
         self.loadMap()
@@ -32,14 +32,14 @@ class Map:
         self.init_file()
 
     def loadJson(self):
-        with open('map.json', 'r') as file:
+        with open(self.inputFile, 'r') as file:
             data = json.load(file)
             self.width = data['width']
             self.height = data['height']
             self.obstacles = [Location(*loc) for loc in sorted(data['obstacles'], key=lambda x: (x[0], x[1]))]
             self.bot = Location(*data['bot'])
-            self.coin = Location(*data['coin'])
             self.obstacles = Location.sort(self.obstacles)
+            self.coin = Coin(Location(*data['coin']), self.height, self.width, self.obstacles, self.bot)
 
     def loadLocs(self):
         self.locations = self.obstacles.copy()
@@ -51,7 +51,7 @@ class Map:
         for ll in self.obstacles:
             self.map[ll.x][ll.y] = '*'
         coin = self.coin
-        self.map[coin.x][coin.y] = 'o'
+        self.map[coin.loc.x][coin.loc.y] = 'o'
         bot = self.bot
         self.map[bot.x][bot.y] = 'X'
 
@@ -144,7 +144,7 @@ class Map:
             return False
 
     def write(self, a):
-        with open(self.filename, mode='a') as file:
+        with open(self.outputFile, mode='a') as file:
             file.write(a +'\n')
 
 
