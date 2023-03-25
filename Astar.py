@@ -2,7 +2,7 @@ import math
 import heapq
 
 import AStarAlogrithm
-from map import Map
+from Map import Map
 from Node import Node
 
 

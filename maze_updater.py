@@ -1,6 +1,6 @@
 import argparse
 
-from map import Map
+from Map import Map
 from txtSequenceRead import TXT
 from Astar import AStarFinder
 
