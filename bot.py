@@ -1,7 +1,7 @@
 import argparse
 
 from Astar import AStarFinder
-from Map import Map
+from map import Map
 
 parser = argparse.ArgumentParser(description='Run bot.')
 parser.add_argument('-i', '--input', type=str, help='Input file path')

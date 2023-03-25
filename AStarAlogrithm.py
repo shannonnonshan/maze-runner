@@ -1,4 +1,4 @@
-from Map import Map
+from map import Map
 from Node import Node
 from location import Location
 
