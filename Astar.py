@@ -13,6 +13,8 @@ class AStarFinder:
         self.closed_set = set()
 
     def find_path(self, m: Map):
+        if m.coin is None:
+            return None
         start_node = Node(location=m.bot, g_score=0, f_score=AStarAlogrithm.AstarUtils.heuristic(m.bot, m.coin.loc))
         self.open_set.append(start_node)
 

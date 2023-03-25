@@ -1,38 +1,46 @@
+import json
 import random
 
 from location import Location
 
 
 class Coin:
-    def __init__(self, coin: Location, height, width, obstacle, bot):
+    def __init__(self, coin: Location, height, width):
         self.loc: Location = coin
-        self.x_range = height
-        self.y_range = width
-        self.obstacles = obstacle
-        self.bot_position = bot
+        self.x_range = [0, height-1]
+        self.y_range = [0, width-1]
         self.positions = set()
         # self.create_coins()
 
-    def create_coins(self):
-        while len(self.positions) < self.x_range[1] * self.y_range[1]:
-            x, y = self.generate_random_position()
-            self.positions.add((x, y))
+    # def create_coins(self):
+    #     while len(self.positions) < self.x_range[1] * self.y_range[1]:
+    #         x, y = self.generate_random_position()
+    #         self.positions.add((x, y))
 
-    def generate_random_position(self):
+    def generate_random_position(self, avoiding):
         while True:
             # Random x, y position for the coin
             x = random.randint(self.x_range[0], self.x_range[1])
             y = random.randint(self.y_range[0], self.y_range[1])
 
             # Check if the coin is not on an obstacle
-            if (x, y) not in self.obstacles:
+            if Location(x, y) not in avoiding:
 
                 # Check if the coin is not on the bot
-                if (x, y) != self.bot_position and (x, y) not in self.positions:
+                if (x, y) not in self.positions:
                     # Add the new coin position to the set of positions
                     self.positions.add((x, y))
                     # Return the valid coin position
                     return x, y
+
+    def store_new_coin(self, inputFile, avoiding):
+        with open(inputFile, 'r') as f:
+            data = json.load(f)
+        self.loc.x, self.loc.y = self.generate_random_position(avoiding)
+        data['coin'] = [self.loc.x, self.loc.y]
+        with open(inputFile, 'w') as f:
+            json.dump(data, f)
+        return self.loc.x, self.loc.y
 
     def __str__(self):
         return f"Coins positions: {self.positions}"

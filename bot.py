@@ -1,15 +1,3 @@
-# from Astar import AStarFinder
-# from map import Map
-#
-# my_map = Map()
-#
-# path = AStarFinder().find_path(my_map)
-# print('My path: ', path)
-# #
-# # for i in path:
-# #     if not my_map.moveTo(i):
-# #         continue
-
 import argparse
 
 from Astar import AStarFinder
@@ -32,13 +20,15 @@ if not args.output:
 try:
     with open(args.input, 'r') as f:
         my_map = Map(args.input, args.output)
+        my_map.printMap()
         path = AStarFinder().find_path(my_map)
         print('My path: ', path)
-        for i in path:
-            if not my_map.moveTo(i):
-                continue
+        if path is not None:
+            for i in path:
+                if not my_map.moveTo(i):
+                    continue
 except FileNotFoundError:
-    print(f'Error: File not found: {args.input}')
+    print(f'Error: File not found')
     exit()
 
 
