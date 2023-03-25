@@ -1,1 +1,1 @@
-{"width": 10, "height": 10, "obstacles": [[0, 1], [1, 1], [2, 1]], "bot": [4, 3], "coin": [4, 7]}
+{"width": 10, "height": 10, "obstacles": [[0, 1], [1, 1], [2, 1]], "bot": [9, 0], "coin": [0, 7]}

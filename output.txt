@@ -1,2 +1,12 @@
-up
-up
+left
+left
+left
+left
+left
+down
+down
+down
+down
+down
+left
+left
