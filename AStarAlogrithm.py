@@ -1,8 +1,6 @@
-
-
+from Map import Map
 from Node import Node
 from location import Location
-from map import Map
 
 
 # khoi tao vi tri

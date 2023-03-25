@@ -2,8 +2,8 @@ import math
 import heapq
 
 import AStarAlogrithm
+from Map import Map
 from Node import Node
-from map import Map
 
 
 class AStarFinder:

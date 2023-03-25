@@ -1,7 +1,8 @@
 import argparse
+
+from Map import Map
 from txtSequenceRead import TXT
 from Astar import AStarFinder
-from map import Map
 
 
 parser = argparse.ArgumentParser(description='Regen coin.')
