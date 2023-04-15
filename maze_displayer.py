@@ -3,7 +3,7 @@ import pygame
 
 # Kích thước màn hình
 SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 800
+SCREEN_HEIGHT = 700
 
 # Tạo màn hình
 pygame.init()
@@ -32,17 +32,22 @@ background_img = pygame.transform.scale(background_img, (SCREEN_WIDTH, SCREEN_HE
 # Lấy thông tin về ma trận maze, robot và đồng xu từ maze_data
 matrix = [[' ' for _ in range(maze_data['width'])] for _ in range(maze_data['height'])]
 bot_pos = maze_data['bot'][::1] # Đảo ngược vị trí của robot
+
+
 coin_pos = maze_data['coin'][::1] # Đảo ngược vị trí của đồng xu
+
+
 for obs in maze_data['obstacles']:
     matrix[obs[0]][obs[1]] = '*' # Đảo ngược tọa độ của vật cản
+   # matrix[obs[0]][obs[1]] += 150  # Add 150 to obstacle's x position
 
 # Hiển thị ma trận maze trên màn hình
 cell_width = SCREEN_WIDTH // maze_data['width']
 cell_height = SCREEN_HEIGHT // maze_data['height']
 for i in range(maze_data['height']):
     for j in range(maze_data['width']):
-        x = j * cell_width
-        y = i * cell_height
+        x = j * cell_width 
+        y = i * cell_height + 70
         if matrix[i][j] == '*':
             screen.blit(tree_img, (x + cell_width//2 - tree_img.get_width()//2, y + cell_height//2 - tree_img.get_height()//2))
         elif (i, j) == tuple(bot_pos):
